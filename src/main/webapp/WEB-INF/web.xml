@@ -1,0 +1,61 @@
+<!DOCTYPE web-app PUBLIC
+ "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+ "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app>
+  <display-name>Archetype Created Web Application</display-name>
+
+  <servlet>
+    <servlet-name>MakeServlet</servlet-name>
+    <servlet-class>ru.job4j.car_sale.servlet.MakeServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MakeServlet</servlet-name>
+    <url-pattern>/makes</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>ModelServlet</servlet-name>
+    <servlet-class>ru.job4j.car_sale.servlet.ModelServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ModelServlet</servlet-name>
+    <url-pattern>/models</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>BodyServlet</servlet-name>
+    <servlet-class>ru.job4j.car_sale.servlet.BodyServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>BodyServlet</servlet-name>
+    <url-pattern>/bodies</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>EngineServlet</servlet-name>
+    <servlet-class>ru.job4j.car_sale.servlet.EngineServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EngineServlet</servlet-name>
+    <url-pattern>/engines</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>TransmissionServlet</servlet-name>
+    <servlet-class>ru.job4j.car_sale.servlet.TransmissionServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>TransmissionServlet</servlet-name>
+    <url-pattern>/transmissions</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>AddServlet</servlet-name>
+    <servlet-class>ru.job4j.car_sale.servlet.AddServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddServlet</servlet-name>
+    <url-pattern>/add</url-pattern>
+  </servlet-mapping>
+</web-app>
