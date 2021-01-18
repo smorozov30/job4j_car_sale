@@ -21,11 +21,8 @@ public class BodyServlet extends HttpServlet {
         resp.setContentType("application/json");
         resp.setCharacterEncoding("UTF-8");
         int id = Integer.parseInt(req.getParameter("id"));
-
         List<Body> bodies = HibernateStore.instOf().getBodiesByModelId(id);
         String jsonResp = gson.toJson(bodies);
-        System.out.println(jsonResp);
-
         resp.getWriter().write(jsonResp);
     }
 }

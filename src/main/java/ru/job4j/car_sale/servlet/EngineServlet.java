@@ -21,11 +21,8 @@ public class EngineServlet extends HttpServlet {
         resp.setContentType("application/json");
         resp.setCharacterEncoding("UTF-8");
         int id = Integer.parseInt(req.getParameter("id"));
-
         List<Engine> engines = HibernateStore.instOf().getEnginesByModelId(id);
         String jsonResp = gson.toJson(engines);
-        System.out.println(jsonResp);
-
         resp.getWriter().write(jsonResp);
     }
 }

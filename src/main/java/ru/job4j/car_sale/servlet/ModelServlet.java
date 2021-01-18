@@ -20,11 +20,8 @@ public class ModelServlet extends HttpServlet {
         resp.setContentType("application/json");
         resp.setCharacterEncoding("UTF-8");
         int id = Integer.parseInt(req.getParameter("id"));
-
         List<Model> models = HibernateStore.instOf().getModelsByMarkId(id);
         String jsonResp = gson.toJson(models);
-        System.out.println(jsonResp);
-
         resp.getWriter().write(jsonResp);
     }
 }
