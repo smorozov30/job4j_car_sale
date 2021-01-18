@@ -3,7 +3,6 @@ package ru.job4j.car_sale.servlet;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import ru.job4j.car_sale.model.Body;
-import ru.job4j.car_sale.model.Model;
 import ru.job4j.car_sale.store.HibernateStore;
 
 import javax.servlet.ServletException;

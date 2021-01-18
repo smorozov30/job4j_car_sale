@@ -2,7 +2,6 @@ package ru.job4j.car_sale.servlet;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import ru.job4j.car_sale.model.Engine;
 import ru.job4j.car_sale.model.Transmission;
 import ru.job4j.car_sale.store.HibernateStore;
 

@@ -76,6 +76,18 @@ public class HibernateStore implements Store {
         });
     }
 
+    @Override
+    public void addUser(User user) {
+        execute(session -> session.save(user));
+    }
+
+    @Override
+    public User getUser(String email) {
+        return (User) execute(session -> session.createQuery("FROM User WHERE email = :email")
+                .setParameter("email", email)
+                .uniqueResult());
+    }
+
     private <T> T execute(final Function<Session, T> command) {
         T result = null;
         try (Session session = sf.openSession()) {

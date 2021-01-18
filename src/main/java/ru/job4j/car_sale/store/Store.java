@@ -10,4 +10,6 @@ public interface Store {
     List<Body> getBodiesByModelId(int modelId);
     List<Engine> getEnginesByModelId(int modelId);
     List<Transmission> getTransmissionsByModelId(int modelId);
+    void addUser(User user);
+    User getUser(String email);
 }
