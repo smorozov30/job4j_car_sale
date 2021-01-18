@@ -11,25 +11,12 @@ public class Engine {
 
     @Expose
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-
-    @Expose
-    @Column(nullable = false)
     private String name;
 
     public static Engine of(String name) {
         Engine engine = new Engine();
         engine.name = name;
         return engine;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -45,19 +32,18 @@ public class Engine {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Engine engine = (Engine) o;
-        return id == engine.id;
+        return Objects.equals(name, engine.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(name);
     }
 
     @Override
     public String toString() {
         return "Engine{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
+                "name='" + name + '\'' +
                 '}';
     }
 }

@@ -5,6 +5,7 @@ import com.google.gson.annotations.Expose;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -13,10 +14,6 @@ public class Make {
 
     @Expose
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-
-    @Expose
     private String name;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -28,14 +25,6 @@ public class Make {
         return mark;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public String getName() {
         return name;
     }
@@ -44,8 +33,8 @@ public class Make {
         this.name = name;
     }
 
-    public Collection<Model> getModels() {
-        return models;
+    public List<Model> getModels() {
+        return (List<Model>) models;
     }
 
     public void addModel(Model model) {
@@ -57,11 +46,18 @@ public class Make {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Make make = (Make) o;
-        return id == make.id;
+        return Objects.equals(name, make.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(name);
+    }
+
+    @Override
+    public String toString() {
+        return "Make{" +
+                "name='" + name + '\'' +
+                '}';
     }
 }

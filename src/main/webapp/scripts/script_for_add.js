@@ -11,7 +11,8 @@ function getMakes() {
     }).done(function (data) {
         $('#make').append('<option selected disabled>Выберите</option>');
         for (let i = 0; i < data.length; i++) {
-            $('#make').append('<option value="' + data[i]["id"] + '">' + data[i]["name"] + '</option>')
+            let name = data[i]["name"];
+            $('#make').append('<option value="' + name + '">' + name + '</option>')
         }
     })
 }
@@ -38,17 +39,18 @@ function getTransmissions() {
     get('transmissions', 'model', 'transmission');
 }
 
-function get(fromServlet, bySelectedId, forSelect) {
+function get(fromServlet, bySelectedName, forSelect) {
     $.ajax({
         type: 'GET',
         url: 'http://localhost:8080/car_sale/' + fromServlet,
-        data: {id : $('#' + bySelectedId + ' option:selected').val()},
+        data: {name : $('#' + bySelectedName + ' option:selected').val()},
         dataType: 'json'
     }).done(function (data) {
         $('#' + forSelect).empty();
         $('#' + forSelect).append('<option selected disabled>Выберите</option>');
         for (let i = 0; i < data.length; i++) {
-            $('#' + forSelect).append('<option value="' + data[i]["id"] + '">' + data[i]["name"] + '</option>')
+            let name = data[i]["name"];
+            $('#' + forSelect).append('<option value="' + name + '">' + name + '</option>')
         }
     })
 }
@@ -56,10 +58,9 @@ function get(fromServlet, bySelectedId, forSelect) {
 function add() {
     let form = $('#addForm')[0];
     let data = new FormData(form);
-
     $.ajax({
-        type: "POST",
-        url: 'http://localhost:8080/car_sale/add',
+        type: 'POST',
+        url: 'http://localhost:8080/car_sale/add.do',
         enctype: 'multipart/form-data',
         processData: false,
         contentType: false,

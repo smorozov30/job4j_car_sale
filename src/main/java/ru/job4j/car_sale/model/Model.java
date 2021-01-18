@@ -8,13 +8,8 @@ import java.util.*;
 @Entity
 @Table(name = "models")
 public class Model {
-
     @Expose
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-
-    @Expose
     private String name;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -32,14 +27,6 @@ public class Model {
         return model;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public String getName() {
         return name;
     }
@@ -48,24 +35,24 @@ public class Model {
         this.name = name;
     }
 
-    public Collection<Body> getBodies() {
-        return bodies;
+    public List<Body> getBodies() {
+        return (List<Body>) bodies;
     }
 
     public void addBody(Body body) {
         bodies.add(body);
     }
 
-    public Collection<Engine> getEngines() {
-        return engines;
+    public List<Engine> getEngines() {
+        return (List<Engine>) engines;
     }
 
     public void addEngine(Engine engine) {
         engines.add(engine);
     }
 
-    public Collection<Transmission> getTransmissions() {
-        return transmissions;
+    public List<Transmission> getTransmissions() {
+        return (List<Transmission>) transmissions;
     }
 
     public void addTransmission(Transmission transmission) {
@@ -77,11 +64,18 @@ public class Model {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Model model = (Model) o;
-        return id == model.id;
+        return Objects.equals(name, model.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(name);
+    }
+
+    @Override
+    public String toString() {
+        return "Model{" +
+                "name='" + name + '\'' +
+                '}';
     }
 }

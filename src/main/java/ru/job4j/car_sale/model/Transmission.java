@@ -11,25 +11,12 @@ public class Transmission {
 
     @Expose
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-
-    @Expose
-    @Column(nullable = false)
     private String name;
 
     public static Transmission of(String name) {
         Transmission transmission = new Transmission();
         transmission.name = name;
         return transmission;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -45,19 +32,18 @@ public class Transmission {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Transmission that = (Transmission) o;
-        return id == that.id;
+        return Objects.equals(name, that.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(name);
     }
 
     @Override
     public String toString() {
         return "Transmission{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
+                "name='" + name + '\'' +
                 '}';
     }
 }

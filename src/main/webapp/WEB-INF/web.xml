@@ -51,11 +51,11 @@
   </servlet-mapping>
 
   <servlet>
-    <servlet-name>AddServlet</servlet-name>
-    <servlet-class>ru.job4j.car_sale.servlet.AddServlet</servlet-class>
+    <servlet-name>CreateAdServlet</servlet-name>
+    <servlet-class>ru.job4j.car_sale.servlet.CreateAdServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>AddServlet</servlet-name>
+    <servlet-name>CreateAdServlet</servlet-name>
     <url-pattern>/add.do</url-pattern>
   </servlet-mapping>
 
@@ -84,6 +84,15 @@
   <servlet-mapping>
     <servlet-name>UserServlet</servlet-name>
     <url-pattern>/user</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>AdsServlet</servlet-name>
+    <servlet-class>ru.job4j.car_sale.servlet.AdsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AdsServlet</servlet-name>
+    <url-pattern>/ads</url-pattern>
   </servlet-mapping>
 
   <filter>

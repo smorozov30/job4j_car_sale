@@ -19,7 +19,7 @@ public class MakeServlet extends HttpServlet {
         Gson gson = builder.excludeFieldsWithoutExposeAnnotation().create();
         resp.setContentType("application/json");
         resp.setCharacterEncoding("UTF-8");
-        List<Make> makes = HibernateStore.instOf().getMarks();
+        List<Make> makes = HibernateStore.instOf().getMakes();
         String jsonResp = gson.toJson(makes);
         resp.getWriter().write(jsonResp);
     }

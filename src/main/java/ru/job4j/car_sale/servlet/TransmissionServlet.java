@@ -19,8 +19,8 @@ public class TransmissionServlet extends HttpServlet {
         Gson gson = builder.excludeFieldsWithoutExposeAnnotation().create();
         resp.setContentType("application/json");
         resp.setCharacterEncoding("UTF-8");
-        int id = Integer.parseInt(req.getParameter("id"));
-        List<Transmission> transmissions = HibernateStore.instOf().getTransmissionsByModelId(id);
+        String name = req.getParameter("name");
+        List<Transmission> transmissions = HibernateStore.instOf().getTransmissionsByModelName(name);
         String jsonResp = gson.toJson(transmissions);
         resp.getWriter().write(jsonResp);
     }
