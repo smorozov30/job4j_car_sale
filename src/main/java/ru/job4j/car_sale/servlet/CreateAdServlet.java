@@ -41,7 +41,7 @@ public class CreateAdServlet extends HttpServlet {
             String transmissionName = new String(items.get(5).get(), StandardCharsets.UTF_8);
             Car car = HibernateStore.instOf().designCar(makeName, modelName, bodyName, engineName, transmissionName);
             Ad ad = Ad.of(car.getId(), description, car, false);
-            File folder = new File("\\images");
+            File folder = new File("C:/Projects/car_sale/src/main/webapp/images");
             if (!folder.exists()) {
                 folder.mkdir();
             }
@@ -55,7 +55,7 @@ public class CreateAdServlet extends HttpServlet {
                     ad.addPhoto(name);
                 }
             }
-            HibernateStore.instOf().addAd(ad);
+            HibernateStore.instOf().addAd(ad, (User) req.getSession().getAttribute("user"));
         } catch (FileUploadException e) {
             e.printStackTrace();
         }

@@ -19,76 +19,76 @@ public class HbmRun {
 //            Session session = sf.openSession();
 //            session.beginTransaction();
 
-//            Body body1 = Body.of("Body 1");
-//            Body body2 = Body.of("Body 2");
-//            Body body3 = Body.of("Body 3");
-//            session.save(body1);
-//            session.save(body2);
-//            session.save(body3);
+//            Body sedan = Body.of("Sedan");
+//            Body hatchback = Body.of("Hatchback");
+//            Body coupe = Body.of("Coupe");
+//            session.save(sedan);
+//            session.save(hatchback);
+//            session.save(coupe);
 //
-//            Engine engine1 = Engine.of("Engine 1");
-//            Engine engine2 = Engine.of("Engine 2");
-//            Engine engine3 = Engine.of("Engine 3");
-//            session.save(engine1);
-//            session.save(engine2);
-//            session.save(engine3);
+//            Engine petrol = Engine.of("Petrol");
+//            Engine diesel = Engine.of("Diesel");
+//            session.save(petrol);
+//            session.save(diesel);
 //
-//            Transmission transmission1 = Transmission.of("Transmission 1");
-//            Transmission transmission2 = Transmission.of("Transmission 2");
-//            Transmission transmission3 = Transmission.of("Transmission 3");
-//            session.save(transmission1);
-//            session.save(transmission2);
-//            session.save(transmission3);
+//            Transmission mechanical = Transmission.of("Mechanical");
+//            Transmission automatic = Transmission.of("Automatic");
+//            Transmission robotic = Transmission.of("Robotic");
+//            session.save(mechanical);
+//            session.save(automatic);
+//            session.save(robotic);
 
-//            Body body1 = session.load(Body.class, "Body 1");
-//            Body body2 = session.load(Body.class, "Body 2");
-//            Body body3 = session.load(Body.class, "Body 3");
+//            Body sedan = session.load(Body.class, "Sedan");
+//            Body hatchback = session.load(Body.class, "Hatchback");
+//            Body coupe = session.load(Body.class, "Coupe");
 //
-//            Engine engine1 = session.load(Engine.class, "Engine 1");
-//            Engine engine2 = session.load(Engine.class, "Engine 2");
-//            Engine engine3 = session.load(Engine.class, "Engine 3");
+//            Engine petrol = session.load(Engine.class, "Petrol");
+//            Engine diesel = session.load(Engine.class, "Diesel");
 //
-//            Transmission transmission1 = session.load(Transmission.class, "Transmission 1");
-//            Transmission transmission2 = session.load(Transmission.class, "Transmission 2");
-//            Transmission transmission3 = session.load(Transmission.class, "Transmission 3");
+//            Transmission mechanical = session.load(Transmission.class, "Mechanical");
+//            Transmission automatic = session.load(Transmission.class, "Automatic");
+//            Transmission robotic = session.load(Transmission.class, "Robotic");
 //
-//            Model polo = Model.of("POLO");
-//            polo.addBody(body1);
-//            polo.addBody(body2);
-//            polo.addEngine(engine1);
-//            polo.addEngine(engine2);
-//            polo.addTransmission(transmission1);
-//            polo.addTransmission(transmission2);
 //
-//            Model passat = Model.of("PASSAT");
-//            passat.addBody(body1);
-//            passat.addEngine(engine2);
-//            passat.addTransmission(transmission2);
+//            Model polo = Model.of("Polo");
+//            polo.addBody(sedan);
+//            polo.addBody(hatchback);
+//            polo.addEngine(petrol);
+//            polo.addTransmission(mechanical);
+//            polo.addTransmission(automatic);
 //
-//            Model jetta = Model.of("JETTA");
-//            jetta.addBody(body2);
-//            jetta.addBody(body3);
-//            jetta.addEngine(engine2);
-//            jetta.addEngine(engine3);
-//            jetta.addTransmission(transmission2);
-//            jetta.addTransmission(transmission3);
+//            Model passat = Model.of("Passat");
+//            passat.addBody(sedan);
+//            passat.addEngine(petrol);
+//            passat.addTransmission(mechanical);
+//            passat.addTransmission(automatic);
+//
+//            Model jetta = Model.of("Jetta");
+//            jetta.addBody(sedan);
+//            jetta.addBody(coupe);
+//            jetta.addEngine(petrol);
+//            jetta.addEngine(diesel);
+//            jetta.addTransmission(mechanical);
+//            jetta.addTransmission(robotic);
 //
 //            Model a6 = Model.of("A6");
-//            a6.addBody(body1);
-//            a6.addBody(body3);
-//            a6.addEngine(engine1);
-//            a6.addEngine(engine3);
-//            a6.addTransmission(transmission1);
-//            a6.addTransmission(transmission3);
+//            a6.addBody(sedan);
+//            a6.addBody(hatchback);
+//            a6.addBody(coupe);
+//            a6.addEngine(petrol);
+//            a6.addEngine(diesel);
+//            a6.addTransmission(mechanical);
+//            a6.addTransmission(automatic);
+//            a6.addTransmission(robotic);
 //
 //            session.save(polo);
 //            session.save(passat);
 //            session.save(jetta);
 //            session.save(a6);
 
-//            Model polo = session.load(Model.class, "POLO");
-//            Model passat = session.load(Model.class, "PASSAT");
-//            Model jetta = session.load(Model.class, "JETTA");
+//            Model polo = session.load(Model.class, "Polo");
+//            Model passat = session.load(Model.class, "Passat");
+//            Model jetta = session.load(Model.class, "Jetta");
 //            Model a6 = session.load(Model.class, "A6");
 //
 //            Make vw = Make.of("VW");

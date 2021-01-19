@@ -3,6 +3,7 @@ package ru.job4j.car_sale.model;
 import com.google.gson.annotations.Expose;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -22,6 +23,15 @@ public class Ad {
     private boolean sold;
 
     @Expose
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date created;
+
+    @Expose
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @Expose
     @OneToOne(cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
     private Car car;
@@ -38,6 +48,7 @@ public class Ad {
         ad.description = description;
         ad.car = car;
         ad.sold = sold;
+        ad.created = new Date(System.currentTimeMillis());
         return ad;
     }
 
@@ -83,6 +94,26 @@ public class Ad {
 
     public void addPhoto(String name) {
         photo.add(name);
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public void addUser(User user) {
+        this.user = user;
+    }
+
+    public Date getCreated() {
+        return created;
+    }
+
+    public void setCreated(Date created) {
+        this.created = created;
     }
 
     @Override

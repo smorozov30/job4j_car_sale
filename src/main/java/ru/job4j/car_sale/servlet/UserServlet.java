@@ -14,7 +14,7 @@ public class UserServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         GsonBuilder builder = new GsonBuilder();
-        Gson gson = builder.create();
+        Gson gson = builder.excludeFieldsWithoutExposeAnnotation().create();
         resp.setContentType("application/json");
         resp.setCharacterEncoding("UTF-8");
         User user = (User) req.getSession().getAttribute("user");

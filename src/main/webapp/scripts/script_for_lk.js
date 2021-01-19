@@ -8,14 +8,14 @@ function currentUser() {
         type: 'GET',
         url: 'http://localhost:8080/car_sale/user'
     }).done(function(data) {
-        $('#enter').replaceWith('<a id="enter" class="nav-link" href="http://localhost:8080/car_sale/login.do">' + data["name"] + '</a>');
+        $('h4').replaceWith('<h4>Объявления пользователя: ' + data["name"] + '</h4>');
     })
 }
 
 function load() {
     $.ajax({
         type: 'GET',
-        url: 'http://localhost:8080/car_sale/ads',
+        url: 'http://localhost:8080/car_sale/lk.do',
         dataType: 'json'
     }).done(function (data) {
         $("tbody").empty();
@@ -30,8 +30,8 @@ function load() {
                 + '<br>' + '<strong>Двигатель: </strong>' + car["engine"]["name"]
                 + '<br>' + '<strong>Коробка: </strong>' + car["transmission"]["name"];
 
-            let done = Boolean(data[i]["sold"]) ? "Продано"
-                : "Не продано";
+            let done = Boolean(data[i]["sold"]) ? '<input type="checkbox" checked onclick="done($(this))" id="' + ads["id"] + '">'
+                : '<input type="checkbox" onclick="done($(this))" id="' + ads["id"] + '">';
 
             $('tbody').append('<tr>'
                 + '<td>' + ads["id"] + '</td>'
@@ -39,10 +39,20 @@ function load() {
                 + '<td><img src="images/' + ads["photo"][0] + '" width="200"></td>'
                 + '<td>' + categories + '</td>'
                 + '<td>' + ads["created"] + '</td>'
-                + '<td>' + ads["user"]["name"] + '</td>'
                 + '<td>' + done + '</td>'
                 + '</tr>'
             );
         }
     });
+}
+
+function done(checkbox) {
+    $.ajax({
+        type: 'POST',
+        url: 'http://localhost:8080/car_sale/sold',
+        data: {id : checkbox.attr('id')}
+    }).done(function() {
+        load();
+    });
+
 }

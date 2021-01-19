@@ -103,8 +103,14 @@ public class HibernateStore implements Store {
     }
 
     @Override
-    public void addAd(Ad ad) {
-        execute(session -> session.save(ad));
+    public void addAd(Ad ad, User user) {
+        execute(session -> {
+            User temp = session.get(User.class, user.getId());
+            System.out.println("USER ID: " + user.getId());
+            ad.addUser(temp);
+            temp.addAd(ad);
+            return ad;
+        });
     }
 
     @Override
@@ -116,6 +122,34 @@ public class HibernateStore implements Store {
                     Hibernate.initialize(ad.getPhoto());
                     Hibernate.initialize(ad.getCar());
                 });
+            }
+            return ads;
+        });
+    }
+
+    @Override
+    public void setSoldById(int id) {
+        execute(session -> {
+            Ad ad = session.get(Ad.class, id);
+            if (ad != null) {
+                ad.setSold(!ad.isSold());
+            }
+            session.update(ad);
+            return ad;
+        });
+    }
+
+    @Override
+    public List<Ad> getAdsByUser(User user) {
+        return execute(session -> {
+            List<Ad> ads = null;
+            User temp = (User) session.createQuery("FROM User WHERE id = :user_id")
+                    .setParameter("user_id", user.getId())
+                    .uniqueResult();
+            if (temp != null) {
+                Hibernate.initialize(temp.getAds());
+                ads = temp.getAds();
+                ads.forEach(ad -> Hibernate.initialize(ad.getPhoto()));
             }
             return ads;
         });

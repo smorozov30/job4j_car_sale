@@ -95,6 +95,24 @@
     <url-pattern>/ads</url-pattern>
   </servlet-mapping>
 
+  <servlet>
+    <servlet-name>LkAdsServlet</servlet-name>
+    <servlet-class>ru.job4j.car_sale.servlet.LkAdsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LkAdsServlet</servlet-name>
+    <url-pattern>/lk.do</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>SoldServlet</servlet-name>
+    <servlet-class>ru.job4j.car_sale.servlet.SoldServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SoldServlet</servlet-name>
+    <url-pattern>/sold</url-pattern>
+  </servlet-mapping>
+
   <filter>
     <filter-name>AuthFilter</filter-name>
     <filter-class>ru.job4j.car_sale.filter.AuthFilter</filter-class>
