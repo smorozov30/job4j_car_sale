@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 import ru.job4j.car_sale.model.Ad;
 import ru.job4j.car_sale.model.User;
 import ru.job4j.car_sale.store.HibernateStore;
+import ru.job4j.car_sale.store.MemStore;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -21,9 +22,8 @@ public class LkAdsServlet extends HttpServlet {
         resp.setContentType("application/json");
         resp.setCharacterEncoding("UTF-8");
         User user = (User) req.getSession().getAttribute("user");
-        List<Ad> ads = HibernateStore.instOf().getAdsByUser(user);
+        List<Ad> ads = MemStore.instOf().getAdsByUser(user);
         String jsonResp = gson.toJson(ads);
-        System.out.println(jsonResp);
         resp.getWriter().write(jsonResp);
     }
 }

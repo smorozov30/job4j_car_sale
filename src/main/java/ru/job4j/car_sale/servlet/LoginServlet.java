@@ -2,6 +2,7 @@ package ru.job4j.car_sale.servlet;
 
 import ru.job4j.car_sale.model.User;
 import ru.job4j.car_sale.store.HibernateStore;
+import ru.job4j.car_sale.store.MemStore;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -20,7 +21,7 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String email = req.getParameter("email");
         String password = req.getParameter("password");
-        User user = HibernateStore.instOf().getUser(email);
+        User user = MemStore.instOf().getUser(email);
         if (user != null && user.getPassword().equals(password)) {
             HttpSession session = req.getSession();
             session.setAttribute("user", user);

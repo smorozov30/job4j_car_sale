@@ -24,14 +24,12 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private Collection<Ad> ads = new ArrayList<>();
 
-    public User() {
-
-    }
-
-    public User(String name, String email, String password) {
-        this.name = name;
-        this.email = email;
-        this.password = password;
+    public static User of(String name, String email, String password) {
+        User user = new User();
+        user.name = name;
+        user.email = email;
+        user.password = password;
+        return user;
     }
 
     public int getId() {
@@ -89,5 +87,12 @@ public class User {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "name='" + name + '\'' +
+                '}';
     }
 }

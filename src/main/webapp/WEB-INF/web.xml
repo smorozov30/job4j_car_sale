@@ -6,47 +6,47 @@
   <display-name>Archetype Created Web Application</display-name>
 
   <servlet>
-    <servlet-name>MakeServlet</servlet-name>
-    <servlet-class>ru.job4j.car_sale.servlet.MakeServlet</servlet-class>
+    <servlet-name>MakesServlet</servlet-name>
+    <servlet-class>ru.job4j.car_sale.servlet.MakesServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>MakeServlet</servlet-name>
+    <servlet-name>MakesServlet</servlet-name>
     <url-pattern>/makes</url-pattern>
   </servlet-mapping>
 
   <servlet>
-    <servlet-name>ModelServlet</servlet-name>
-    <servlet-class>ru.job4j.car_sale.servlet.ModelServlet</servlet-class>
+    <servlet-name>ModelsServlet</servlet-name>
+    <servlet-class>ru.job4j.car_sale.servlet.ModelsServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>ModelServlet</servlet-name>
+    <servlet-name>ModelsServlet</servlet-name>
     <url-pattern>/models</url-pattern>
   </servlet-mapping>
 
   <servlet>
-    <servlet-name>BodyServlet</servlet-name>
-    <servlet-class>ru.job4j.car_sale.servlet.BodyServlet</servlet-class>
+    <servlet-name>BodiesServlet</servlet-name>
+    <servlet-class>ru.job4j.car_sale.servlet.BodiesServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>BodyServlet</servlet-name>
+    <servlet-name>BodiesServlet</servlet-name>
     <url-pattern>/bodies</url-pattern>
   </servlet-mapping>
 
   <servlet>
-    <servlet-name>EngineServlet</servlet-name>
-    <servlet-class>ru.job4j.car_sale.servlet.EngineServlet</servlet-class>
+    <servlet-name>EnginesServlet</servlet-name>
+    <servlet-class>ru.job4j.car_sale.servlet.EnginesServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>EngineServlet</servlet-name>
+    <servlet-name>EnginesServlet</servlet-name>
     <url-pattern>/engines</url-pattern>
   </servlet-mapping>
 
   <servlet>
-    <servlet-name>TransmissionServlet</servlet-name>
-    <servlet-class>ru.job4j.car_sale.servlet.TransmissionServlet</servlet-class>
+    <servlet-name>TransmissionsServlet</servlet-name>
+    <servlet-class>ru.job4j.car_sale.servlet.TransmissionsServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>TransmissionServlet</servlet-name>
+    <servlet-name>TransmissionsServlet</servlet-name>
     <url-pattern>/transmissions</url-pattern>
   </servlet-mapping>
 
@@ -87,11 +87,11 @@
   </servlet-mapping>
 
   <servlet>
-    <servlet-name>AdsServlet</servlet-name>
-    <servlet-class>ru.job4j.car_sale.servlet.AdsServlet</servlet-class>
+    <servlet-name>MainAdsServlet</servlet-name>
+    <servlet-class>ru.job4j.car_sale.servlet.MainAdsServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>AdsServlet</servlet-name>
+    <servlet-name>MainAdsServlet</servlet-name>
     <url-pattern>/ads</url-pattern>
   </servlet-mapping>
 
@@ -117,9 +117,9 @@
     <filter-name>AuthFilter</filter-name>
     <filter-class>ru.job4j.car_sale.filter.AuthFilter</filter-class>
   </filter>
-
   <filter-mapping>
     <filter-name>AuthFilter</filter-name>
     <url-pattern>*.do</url-pattern>
   </filter-mapping>
+
 </web-app>

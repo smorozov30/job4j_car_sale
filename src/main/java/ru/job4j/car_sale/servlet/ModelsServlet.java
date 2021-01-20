@@ -2,8 +2,9 @@ package ru.job4j.car_sale.servlet;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import ru.job4j.car_sale.model.Engine;
+import ru.job4j.car_sale.model.Model;
 import ru.job4j.car_sale.store.HibernateStore;
+import ru.job4j.car_sale.store.MemStore;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -12,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-public class EngineServlet extends HttpServlet {
+public class ModelsServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         GsonBuilder builder = new GsonBuilder();
@@ -20,8 +21,8 @@ public class EngineServlet extends HttpServlet {
         resp.setContentType("application/json");
         resp.setCharacterEncoding("UTF-8");
         String name = req.getParameter("name");
-        List<Engine> engines = HibernateStore.instOf().getEnginesByModelName(name);
-        String jsonResp = gson.toJson(engines);
+        List<Model> models = MemStore.instOf().getModelsByMakeName(name);
+        String jsonResp = gson.toJson(models);
         resp.getWriter().write(jsonResp);
     }
 }

@@ -2,6 +2,7 @@ package ru.job4j.car_sale.servlet;
 
 import ru.job4j.car_sale.model.User;
 import ru.job4j.car_sale.store.HibernateStore;
+import ru.job4j.car_sale.store.MemStore;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -20,9 +21,9 @@ public class RegServlet extends HttpServlet {
         String name = req.getParameter("name");
         String email = req.getParameter("email");
         String password = req.getParameter("password");
-        User newUser = new User(name, email, password);
-        if (HibernateStore.instOf().getUser(email) == null) {
-            HibernateStore.instOf().addUser(newUser);
+        User newUser = User.of(name, email, password);
+        if (MemStore.instOf().getUser(email) == null) {
+            MemStore.instOf().addUser(newUser);
             resp.sendRedirect(req.getContextPath() + "/login.html");
         } else {
             doGet(req, resp);

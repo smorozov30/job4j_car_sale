@@ -28,6 +28,58 @@ public class HibernateStore implements Store {
     }
 
     @Override
+    public void addAd(Ad ad, User user) {
+        execute(session -> {
+            User temp = session.get(User.class, user.getId());
+            ad.addUser(temp);
+            temp.addAd(ad);
+            return ad;
+        });
+    }
+
+    @Override
+    public List<Ad> getAds() {
+        return execute(session -> {
+            List<Ad> ads = session.createQuery("FROM Ad").list();
+            if (ads != null) {
+                ads.forEach(ad -> {
+                    Hibernate.initialize(ad.getPhoto());
+                    Hibernate.initialize(ad.getCar());
+                });
+            }
+            return ads;
+        });
+    }
+
+    @Override
+    public List<Ad> getAdsByUser(User user) {
+        return execute(session -> {
+            List<Ad> ads = null;
+            User temp = (User) session.createQuery("FROM User WHERE id = :user_id")
+                    .setParameter("user_id", user.getId())
+                    .uniqueResult();
+            if (temp != null) {
+                Hibernate.initialize(temp.getAds());
+                ads = temp.getAds();
+                ads.forEach(ad -> Hibernate.initialize(ad.getPhoto()));
+            }
+            return ads;
+        });
+    }
+
+    @Override
+    public void setSoldById(int id) {
+        execute(session -> {
+            Ad ad = session.get(Ad.class, id);
+            if (ad != null) {
+                ad.setSold(!ad.isSold());
+            }
+            session.update(ad);
+            return ad;
+        });
+    }
+
+    @Override
     public List<Make> getMakes() {
         return execute(session -> session.createQuery("FROM Make").list());
     }
@@ -100,59 +152,6 @@ public class HibernateStore implements Store {
         });
         execute(session -> session.save(car));
         return car;
-    }
-
-    @Override
-    public void addAd(Ad ad, User user) {
-        execute(session -> {
-            User temp = session.get(User.class, user.getId());
-            System.out.println("USER ID: " + user.getId());
-            ad.addUser(temp);
-            temp.addAd(ad);
-            return ad;
-        });
-    }
-
-    @Override
-    public List<Ad> getAds() {
-        return execute(session -> {
-            List<Ad> ads = session.createQuery("FROM Ad").list();
-            if (ads != null) {
-                ads.forEach(ad -> {
-                    Hibernate.initialize(ad.getPhoto());
-                    Hibernate.initialize(ad.getCar());
-                });
-            }
-            return ads;
-        });
-    }
-
-    @Override
-    public void setSoldById(int id) {
-        execute(session -> {
-            Ad ad = session.get(Ad.class, id);
-            if (ad != null) {
-                ad.setSold(!ad.isSold());
-            }
-            session.update(ad);
-            return ad;
-        });
-    }
-
-    @Override
-    public List<Ad> getAdsByUser(User user) {
-        return execute(session -> {
-            List<Ad> ads = null;
-            User temp = (User) session.createQuery("FROM User WHERE id = :user_id")
-                    .setParameter("user_id", user.getId())
-                    .uniqueResult();
-            if (temp != null) {
-                Hibernate.initialize(temp.getAds());
-                ads = temp.getAds();
-                ads.forEach(ad -> Hibernate.initialize(ad.getPhoto()));
-            }
-            return ads;
-        });
     }
 
     private <T> T execute(final Function<Session, T> command) {
