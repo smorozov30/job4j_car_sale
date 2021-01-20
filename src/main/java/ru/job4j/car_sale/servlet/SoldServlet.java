@@ -1,7 +1,6 @@
 package ru.job4j.car_sale.servlet;
 
 import ru.job4j.car_sale.store.HibernateStore;
-import ru.job4j.car_sale.store.MemStore;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -13,6 +12,6 @@ public class SoldServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int id = Integer.parseInt(req.getParameter("id"));
-        MemStore.instOf().setSoldById(id);
+        HibernateStore.instOf().setSoldById(id);
     }
 }

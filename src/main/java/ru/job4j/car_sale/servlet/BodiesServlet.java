@@ -4,7 +4,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import ru.job4j.car_sale.model.Body;
 import ru.job4j.car_sale.store.HibernateStore;
-import ru.job4j.car_sale.store.MemStore;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -21,7 +20,7 @@ public class BodiesServlet extends HttpServlet {
         resp.setContentType("application/json");
         resp.setCharacterEncoding("UTF-8");
         String name = req.getParameter("name");
-        List<Body> bodies = MemStore.instOf().getBodiesByModelName(name);
+        List<Body> bodies = HibernateStore.instOf().getBodiesByModelName(name);
         String jsonResp = gson.toJson(bodies);
         resp.getWriter().write(jsonResp);
     }

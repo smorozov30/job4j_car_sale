@@ -6,7 +6,6 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import ru.job4j.car_sale.model.*;
 import ru.job4j.car_sale.store.HibernateStore;
-import ru.job4j.car_sale.store.MemStore;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -51,7 +50,7 @@ public class CreateAdServlet extends HttpServlet {
                     ad.addPhoto(name);
                 }
             }
-            MemStore.instOf().addAd(ad, (User) req.getSession().getAttribute("user"));
+            HibernateStore.instOf().addAd(ad, (User) req.getSession().getAttribute("user"));
         } catch (FileUploadException e) {
             e.printStackTrace();
         }
@@ -64,6 +63,6 @@ public class CreateAdServlet extends HttpServlet {
         String bodyName = new String(items.get(3).get(), StandardCharsets.UTF_8);
         String engineName = new String(items.get(4).get(), StandardCharsets.UTF_8);
         String transmissionName = new String(items.get(5).get(), StandardCharsets.UTF_8);
-        return MemStore.instOf().designCar(makeName, modelName, bodyName, engineName, transmissionName);
+        return HibernateStore.instOf().designCar(makeName, modelName, bodyName, engineName, transmissionName);
     }
 }

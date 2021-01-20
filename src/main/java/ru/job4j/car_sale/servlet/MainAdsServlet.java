@@ -4,7 +4,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import ru.job4j.car_sale.model.Ad;
 import ru.job4j.car_sale.store.HibernateStore;
-import ru.job4j.car_sale.store.MemStore;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -20,7 +19,7 @@ public class MainAdsServlet extends HttpServlet {
         Gson gson = builder.excludeFieldsWithoutExposeAnnotation().create();
         resp.setContentType("application/json");
         resp.setCharacterEncoding("UTF-8");
-        List<Ad> ads = MemStore.instOf().getAds();
+        List<Ad> ads = HibernateStore.instOf().getAds();
         String jsonResp = gson.toJson(ads);
         resp.getWriter().write(jsonResp);
     }
