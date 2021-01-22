@@ -16,6 +16,14 @@
 Главная страница со всеми объявлениями.
 ![start page](images/main_page.jpg)
 
+На странице главной странице есть фильтр по критериям: 
+* Объявления за последний день
+* Объявления только с фото
+* Объявления только с определенной маркой авто
+
+![filter_all](images/filter_all.jpg)
+![filter_all](images/filter_only_with_photo.jpg)
+
 Страница добавления объявления.
 ![add_page](images/add_page.jpg)
 

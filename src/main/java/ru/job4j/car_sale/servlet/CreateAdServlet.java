@@ -41,7 +41,7 @@ public class CreateAdServlet extends HttpServlet {
                 folder.mkdir();
             }
             for (FileItem item : items) {
-                if (!item.isFormField()) {
+                if (!item.isFormField() && item.getSize() != 0) {
                     String name = item.getName();
                     File file = new File(folder + File.separator + name);
                     try (FileOutputStream out = new FileOutputStream(file)) {

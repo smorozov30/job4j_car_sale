@@ -33,10 +33,12 @@ function load() {
             let done = Boolean(data[i]["sold"]) ? '<input type="checkbox" checked onclick="done($(this))" id="' + ads["id"] + '">'
                 : '<input type="checkbox" onclick="done($(this))" id="' + ads["id"] + '">';
 
+            let photo = ads["photo"].length === 0 ? "no_photo.jpg" : ads["photo"][0];
+
             $('tbody').append('<tr>'
                 + '<td>' + ads["id"] + '</td>'
                 + '<td>' + ads["description"] + '</td>'
-                + '<td><img src="images/' + ads["photo"][0] + '" width="200"></td>'
+                + '<td><img src="images/' + photo + '" width="200"></td>'
                 + '<td>' + categories + '</td>'
                 + '<td>' + ads["created"] + '</td>'
                 + '<td>' + done + '</td>'
