@@ -8,6 +8,7 @@ import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import ru.job4j.car_sale.model.*;
 
+import java.util.Date;
 import java.util.List;
 import java.util.function.Function;
 
@@ -40,13 +41,16 @@ public class HibernateStore implements Store {
     @Override
     public List<Ad> getAds() {
         return execute(session -> {
-            List<Ad> ads = session.createQuery("FROM Ad").list();
-            if (ads != null) {
-                ads.forEach(ad -> {
-                    Hibernate.initialize(ad.getPhoto());
-                    Hibernate.initialize(ad.getCar());
-                });
-            }
+            List<Ad> ads = session.createQuery("SELECT DISTINCT a FROM Ad a " +
+                                                    "JOIN FETCH a.user " +
+                                                    "JOIN FETCH a.car c " +
+                                                        "JOIN FETCH c.make " +
+                                                        "JOIN FETCH c.model " +
+                                                        "JOIN FETCH c.body " +
+                                                        "JOIN FETCH c.engine " +
+                                                        "JOIN FETCH c.transmission " +
+                                                    "LEFT JOIN FETCH a.photo"
+            ).list();
             return ads;
         });
     }
@@ -63,6 +67,63 @@ public class HibernateStore implements Store {
                 ads = temp.getAds();
                 ads.forEach(ad -> Hibernate.initialize(ad.getPhoto()));
             }
+            return ads;
+        });
+    }
+
+    @Override
+    public List<Ad> getAdsForLastDay() {
+        return execute(session -> {
+            Date today = new Date();
+            today.setHours(0);
+            today.setMinutes(0);
+            today.setSeconds(0);
+            List<Ad> ads = session.createQuery("SELECT DISTINCT a FROM Ad a " +
+                                                "JOIN FETCH a.user " +
+                                                "JOIN FETCH a.car c " +
+                                                    "JOIN FETCH c.make " +
+                                                    "JOIN FETCH c.model " +
+                                                    "JOIN FETCH c.body " +
+                                                    "JOIN FETCH c.engine " +
+                                                    "JOIN FETCH c.transmission " +
+                                                "LEFT JOIN FETCH a.photo " +
+                                                "WHERE a.created >= :lastDay"
+            ).setParameter("lastDay", today).list();
+            return ads;
+        });
+    }
+
+    @Override
+    public List<Ad> getAdsWithPhoto() {
+        return execute(session -> {
+            List<Ad> ads = session.createQuery("SELECT DISTINCT a FROM Ad a " +
+                                                "JOIN FETCH a.user " +
+                                                "JOIN FETCH a.car c " +
+                                                    "JOIN FETCH c.make " +
+                                                    "JOIN FETCH c.model " +
+                                                    "JOIN FETCH c.body " +
+                                                    "JOIN FETCH c.engine " +
+                                                    "JOIN FETCH c.transmission " +
+                                                "JOIN FETCH a.photo"
+            ).list();
+            return ads;
+        });
+    }
+
+    @Override
+    public List<Ad> getAdsByMake(String make) {
+        return execute(session -> {
+            List<Ad> ads = session.createQuery("SELECT DISTINCT a FROM Ad a " +
+                                                "JOIN FETCH a.user " +
+                                                "JOIN FETCH a.car c " +
+                                                    "JOIN FETCH c.make m " +
+                                                    "JOIN FETCH c.model " +
+                                                    "JOIN FETCH c.body " +
+                                                    "JOIN FETCH c.engine " +
+                                                    "JOIN FETCH c.transmission " +
+                                                "LEFT JOIN FETCH a.photo " +
+                                                "WHERE m.name = :make"
+            ).setParameter("make", make).list();
             return ads;
         });
     }

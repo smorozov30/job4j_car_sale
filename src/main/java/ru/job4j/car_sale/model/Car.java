@@ -15,27 +15,27 @@ public class Car {
     private int id;
 
     @Expose
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "makes_id")
     private Make make;
 
     @Expose
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "models_id")
     private Model model;
 
     @Expose
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "bodies_id")
     private Body body;
 
     @Expose
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "engine_id")
     private Engine engine;
 
     @Expose
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "transmissions_id")
     private Transmission transmission;
 

@@ -2,12 +2,10 @@ package ru.job4j.car_sale.store;
 
 import ru.job4j.car_sale.model.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 public class MemStore implements Store {
     private static final AtomicInteger USER_ID = new AtomicInteger(1);
@@ -93,6 +91,25 @@ public class MemStore implements Store {
     @Override
     public List<Ad> getAdsByUser(User user) {
         return user.getAds();
+    }
+
+    @Override
+    public List<Ad> getAdsForLastDay() {
+        Date today = new Date();
+        today.setHours(0);
+        today.setMinutes(0);
+        today.setSeconds(0);
+        return getAds().stream().filter(ad -> ad.getCreated().after(today)).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Ad> getAdsWithPhoto() {
+        return getAds().stream().filter(ad -> !ad.getPhoto().isEmpty()).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Ad> getAdsByMake(String make) {
+        return getAds().stream().filter(ad -> ad.getCar().getMake().getName().equals(make)).collect(Collectors.toList());
     }
 
     @Override

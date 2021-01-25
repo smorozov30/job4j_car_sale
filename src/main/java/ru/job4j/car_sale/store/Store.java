@@ -8,6 +8,9 @@ public interface Store {
     void addAd(Ad ad, User user);
     List<Ad> getAds();
     List<Ad> getAdsByUser(User user);
+    List<Ad> getAdsForLastDay();
+    List<Ad> getAdsWithPhoto();
+    List<Ad> getAdsByMake(String make);
     void setSoldById(int id);
     List<Make> getMakes();
     List<Model> getModelsByMakeName(String markName);
