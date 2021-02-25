@@ -1,6 +1,7 @@
 package ru.job4j.car_sale.model;
 
 import com.google.gson.annotations.Expose;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -9,26 +10,31 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@Table(name = "ads")
+@Table(name = "ADS")
 public class Ad {
 
     @Expose
     @Id
+    @Column(name = "ID", nullable = false)
     private int id;
 
     @Expose
+    @Column(name = "DESCRIPTION", nullable = false)
     private String description;
 
     @Expose
+    @Column(name = "SOLD",  nullable = false)
     private boolean sold;
 
     @Expose
     @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "CREATED", nullable = false, updatable = false)
+    @CreationTimestamp
     private Date created;
 
     @Expose
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "USER_ID", updatable = false)
     private User user;
 
     @Expose
@@ -38,8 +44,8 @@ public class Ad {
 
     @Expose
     @ElementCollection
-    @CollectionTable(name = "photo", joinColumns = @JoinColumn(name = "ads_id"))
-    @Column(name = "name")
+    @CollectionTable(name = "PHOTO", joinColumns = @JoinColumn(name = "ADS_ID"))
+    @Column(name = "FILENAME")
     private Set<String> photo = new HashSet<>();
 
     public static Ad of(int id, String description, Car car, boolean sold) {
@@ -48,7 +54,6 @@ public class Ad {
         ad.description = description;
         ad.car = car;
         ad.sold = sold;
-        ad.created = new Date(System.currentTimeMillis());
         return ad;
     }
 

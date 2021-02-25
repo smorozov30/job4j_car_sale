@@ -9,19 +9,25 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name = "users")
+@Table(name = "USERS")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID", nullable = false, updatable = false)
     private int id;
 
     @Expose
+    @Column(name = "NAME", nullable = false)
     private String name;
+
+    @Column(name = "EMAIL", nullable = false)
     private String email;
+
+    @Column(name = "PASSWORD", nullable = false)
     private String password;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Collection<Ad> ads = new ArrayList<>();
 
     public static User of(String name, String email, String password) {

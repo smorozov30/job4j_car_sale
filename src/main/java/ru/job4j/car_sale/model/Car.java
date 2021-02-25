@@ -7,36 +7,37 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "car")
+@Table(name = "CAR")
 public class Car {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID", nullable = false, updatable = false)
     private int id;
 
     @Expose
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "makes_id")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "makes_id", nullable = false, updatable = false)
     private Make make;
 
     @Expose
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "models_id")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "models_id", nullable = false, updatable = false)
     private Model model;
 
     @Expose
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "bodies_id")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "bodies_id", nullable = false, updatable = false)
     private Body body;
 
     @Expose
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "engine_id")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "engine_id", nullable = false)
     private Engine engine;
 
     @Expose
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "transmissions_id")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "transmissions_id", nullable = false)
     private Transmission transmission;
 
     public static Car of(Make make, Model model, Body body, Engine engine, Transmission transmission) {
